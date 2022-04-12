@@ -6,7 +6,7 @@ flowchart LR
 A((VM1/10.65.10.66)) <-->|Internet| B((VM2/10.65.10.63))
 ```
 
-## Wireguard Server Config
+## Wireguard Server Config (VM1)
 Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
 ```zsh
 [Interface]
@@ -19,7 +19,7 @@ PublicKey = <freertr-vm2-public-key>
 AllowedIPs = 192.168.1.0/24
 ```
 
-## Debian-R2 freeRouter HW and SW configs
+## freeRouter HW and SW configs (VM2)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
 int eth1 eth 0000.2222.0001 127.0.0.1 20001 127.0.0.1 65535
