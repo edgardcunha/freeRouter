@@ -3,7 +3,7 @@
 ## Topology
 ```mermaid
 flowchart LR
-A((VM1)) <-->|Internet| B((VM2))
+A((VM1/10.65.10.66)) <-->|Internet| B((VM2/10.65.10.63))
 ```
 
 ## Wireguard Server Config
