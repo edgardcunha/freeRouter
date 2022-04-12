@@ -1,5 +1,11 @@
 # Wireguard tunnel between VMs (OpenStack)
 
+## Topology
+```mermaid
+flowchart LR
+A((VM1)) <-->|Internet| B((VM2))
+```
+
 ## Wireguard Server Config
 Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
 ```zsh
