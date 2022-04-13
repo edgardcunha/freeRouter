@@ -10,7 +10,7 @@ flowchart LR
     subgraph VM2 ["VM2"]
         B((r2))
     end
-    VM1 <==>|Internet| B
+    VM1 <==>|Wireguard Tunnel| B
 ```
 
 ## Wireguard Server Config (VM1)
