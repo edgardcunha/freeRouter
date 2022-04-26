@@ -5,7 +5,7 @@ VM1 (10.65.10.66/16) and VM2 (10.65.10.63)
 ```mermaid
 flowchart LR
     subgraph VM1 ["VM1"]
-        A((r1))
+        
     end
     subgraph VM2 ["VM2"]
         B((r2))
