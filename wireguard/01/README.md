@@ -1,4 +1,4 @@
-# Wireguard tunnel between VMs (OpenStack)
+# Wireguard tunnel between VM1 and router R2 (freeRtr in VM2)
 
 ## Topology
 VM1 (10.65.10.66/16) and VM2 (10.65.10.63)
