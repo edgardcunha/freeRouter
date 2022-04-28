@@ -17,7 +17,7 @@ flowchart LR
     B <==>| Tunnel | C
 ```
 
-## freeRouter HW and SW configs (VM1)
+## R1 HW and SW configs (VM1)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
 int eth1 eth 0000.1111.0001 127.0.0.1 20001 127.0.0.1 65535
