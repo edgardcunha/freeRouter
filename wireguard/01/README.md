@@ -83,7 +83,7 @@ interface eth1
 server telnet tel
  security protocol telnet
  exec timeout 10000000
- exec colorize
+ exec colorize prompt
  exec logging
  no exec authorization
  no login authentication
