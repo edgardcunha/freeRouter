@@ -1,7 +1,7 @@
 # Wireguard tunnel between R1 (VM1), WG-Server (VM2) and R2 (VM1)
 
 ## Topology
-VM1 (10.65.10.66/16) and VM2 (10.65.10.63)
+VM1 (10.250.250.242/16), VM2 (10.250.250.243/16) and VM2 (10.250.250.244/16)
 ```mermaid
 flowchart LR
     subgraph VM1 ["VM1"]
