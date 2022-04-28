@@ -1,4 +1,27 @@
+# Wireguard tunnel between R1 (VM1), WG-Server (VM2) and R2 (VM1)
 
+## Topology
+VM1 (10.65.10.66/16) and VM2 (10.65.10.63)
+```mermaid
+flowchart LR
+    subgraph VM1 ["VM1"]
+        
+    end
+    subgraph VM2 ["VM2"]
+        B((r2))
+    end
+    VM1 <==>|Wireguard Tunnel| B
+```
+
+## freeRouter HW and SW configs (VM1)
+Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
+```zsh
+int eth1 eth 0000.1111.0001 127.0.0.1 20001 127.0.0.1 65535
+tcp2vrf 2323 v1 23
+proc eth0 sudo /rtr/pcapInt.bin eth0 65535 127.0.0.1 20001 127.0.0.1
+```
+Software configuration file `sudo nano /rtr/rtr-hw.txt`:
+```zsh
 hostname r1
 !
 crypto ipsec ips1
@@ -55,3 +78,17 @@ server telnet tel
 client udp-checksum transmit
 ipv4 route v1 10.250.250.244 /32 10.0.2.16
 end
+```
+
+## Wireguard Server Config (VM2)
+Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
+```zsh
+[Interface]
+Address = 192.168.1.1/24
+ListenPort = 51820
+PrivateKey = <debian-vm1-private-key>
+
+[Peer]
+PublicKey = <freertr-vm2-public-key>
+AllowedIPs = 192.168.1.0/24
+```
