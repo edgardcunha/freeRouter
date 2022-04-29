@@ -24,7 +24,7 @@ int eth1 eth 0000.1111.0001 127.0.0.1 20001 127.0.0.1 65535
 tcp2vrf 2323 v1 23
 proc eth0 sudo /rtr/pcapInt.bin eth0 65535 127.0.0.1 20001 127.0.0.1
 ```
-Software configuration file `sudo nano /rtr/rtr-hw.txt`:
+Software configuration file `sudo nano /rtr/rtr-sw.txt`:
 ```zsh
 hostname r1
 !
@@ -95,4 +95,13 @@ PrivateKey = <debian-vm1-private-key>
 [Peer]
 PublicKey = <freertr-vm2-public-key>
 AllowedIPs = 192.168.1.0/24
+```
+## Launch freeRouter
+Edit `start.sh` file with the command:
+```zsh
+echo "java -jar /rtr/rtr.jar routersc /rtr/rtr-hw.txt /rtr/rtr-sw.txt" > start.sh
+```
+Make it executable:
+```zsh
+sudo chmod +x start.sh
 ```
