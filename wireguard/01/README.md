@@ -26,7 +26,7 @@ PublicKey = <freertr-vm2-public-key>
 AllowedIPs = 192.168.1.0/24
 ```
 
-## freeRouter HW and SW configs (VM2)
+## R2 HW and SW configs (VM2)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
 int eth1 eth 0000.2222.0001 127.0.0.1 20001 127.0.0.1 65535
