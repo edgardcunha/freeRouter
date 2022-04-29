@@ -5,12 +5,12 @@ VM1 (10.65.10.66/16) and VM2 (10.65.10.63)
 ```mermaid
 flowchart LR
     subgraph VM1 ["VM1"]
-        
+        A[WG-Server]
     end
     subgraph VM2 ["VM2"]
         B((r2))
     end
-    VM1 <==>|Wireguard Tunnel| B
+    A <==>|Wireguard Tunnel| B
 ```
 
 ## Wireguard Server Config (VM1)
