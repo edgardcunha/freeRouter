@@ -17,7 +17,50 @@ flowchart LR
     B <==>| Tunnel | C
 ```
 
-## R1 HW and SW configs (VM1)
+## VM configuration (Vagrant)
+
+### R1
+```zsh
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # vagrant box
+  config.vm.box = "debian/bullseye64"
+
+  # sharing files between host and guest
+  config.vm.synced_folder ".", "/home/vagrant_data"
+
+  # https://www.vagrantup.com/docs/networking/forwarded_ports
+  config.vm.usable_port_range = 8000..8999
+
+  # Provider-specific configuration. These expose provider-specific options.
+  config.vm.provider "virtualbox" do |vb|
+ 	# Customize the amount of memory on the VM:
+ 	vb.memory = "1024"
+ 	vb.cpus = 1
+ 	vb.name = "debian-bullseye64-vm1"
+  end
+
+ # Provisioning guest
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get upgrade -y
+    apt-get install -y default-jre-headless --no-install-recommends
+    wget www.freertr.net/rtr.jar
+    wget www.freertr.net/rtr-`uname -m`.tar -O rtr.tar
+    mkdir /rtr
+    mv rtr.* /rtr
+    tar -xvf /rtr/rtr.tar -C /rtr
+  SHELL
+end
+```
+
+### R2
+
+### R3
+
+### R1 HW and SW configs (VM1)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
 int eth1 eth 0000.1111.0001 127.0.0.1 20001 127.0.0.1 65535
@@ -84,7 +127,7 @@ ipv4 route v1 10.250.250.244 /32 10.0.2.16
 end
 ```
 
-## Wireguard Server Config (VM2)
+### Wireguard Server Config (VM2)
 Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
 ```zsh
 [Interface]
@@ -96,7 +139,7 @@ PrivateKey = <debian-vm1-private-key>
 PublicKey = <freertr-vm2-public-key>
 AllowedIPs = 192.168.1.0/24
 ```
-## Launch freeRouter
+### Launch freeRouter
 Edit `start.sh` file with the command:
 ```zsh
 echo "java -jar /rtr/rtr.jar routersc /rtr/rtr-hw.txt /rtr/rtr-sw.txt" > start.sh
