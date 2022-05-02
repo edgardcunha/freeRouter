@@ -19,7 +19,7 @@ flowchart LR
 
 ## VM configuration (Vagrant)
 
-### R1
+### VM1 Vagrant config
 ```zsh
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -56,9 +56,10 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-### R2
+### VM2 Vagrant config
+Similar to VM1 configuration. Just changing `vb.name="debian-bullseye64-vm2"`.
 
-### R3
+### VM3 Vagrant config
 
 ### R1 HW and SW configs (VM1)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
