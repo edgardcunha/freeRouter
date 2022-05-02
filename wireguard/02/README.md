@@ -8,7 +8,7 @@ flowchart LR
         A((r1))
     end
     subgraph VM2 ["VM2"]
-        B[WG-Server]
+        B[WGS]
     end
     subgraph VM3 ["VM3"]
         C((r2))
