@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "debian/bullseye64"
 
   # sharing files between host and guest
-  config.vm.synced_folder ".", "/home/vagrant_data"
+  config.vm.synced_folder ".", "/home/vagrant/data"
 
   # https://www.vagrantup.com/docs/networking/forwarded_ports
   config.vm.usable_port_range = 8000..8999
@@ -71,6 +71,26 @@ SHELL
 
 ### VM3 Vagrant config
 Similar to VM1 configuration. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
+
+## Wireguard Server Config (VM2)
+Generate the public and private keys for `WG-Server`, `R1` and `R2`.
+```zsh
+umask 077 && wg genkey > wgs-private-key && wg pubkey < wgs-private-key > wgs-public-key
+umask 077 && wg genkey > r1-private-key && wg pubkey < r1-private-key > r1-public-key
+umask 077 && wg genkey > r2-private-key && wg pubkey < r2-private-key > r2-public-key
+```
+
+Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
+```zsh
+[Interface]
+Address = 192.168.1.1/24
+ListenPort = 51820
+PrivateKey = <debian-vm1-private-key>
+
+[Peer]
+PublicKey = <freertr-vm2-public-key>
+AllowedIPs = 192.168.1.0/24
+```
 
 ## Router configuration (freeRtr)
 
@@ -141,18 +161,6 @@ ipv4 route v1 10.250.250.244 /32 10.0.2.16
 end
 ```
 
-### Wireguard Server Config (VM2)
-Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
-```zsh
-[Interface]
-Address = 192.168.1.1/24
-ListenPort = 51820
-PrivateKey = <debian-vm1-private-key>
-
-[Peer]
-PublicKey = <freertr-vm2-public-key>
-AllowedIPs = 192.168.1.0/24
-```
 ### Launch freeRouter
 Edit `start.sh` file with the command:
 ```zsh
