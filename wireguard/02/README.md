@@ -20,6 +20,7 @@ flowchart LR
 ## VM configuration (Vagrant)
 
 ### VM1 Vagrant config
+Simplified version of VM1 Vagrantfile configuration.
 ```zsh
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -57,9 +58,6 @@ end
 ```
 
 ### VM2 Vagrant config
-Similar to VM1 configuration. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
-
-### VM3 Vagrant config
 Similar to VM1 configuration. Just changing guest provisioning only.
 
 ```zsh
@@ -70,6 +68,11 @@ config.vm.provision "shell", inline: <<-SHELL
      apt-get install -y wireguard
 SHELL
 ```
+
+### VM3 Vagrant config
+Similar to VM1 configuration. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
+
+## Router configuration (freeRtr)
 
 ### R1 HW and SW configs (VM1)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
