@@ -92,6 +92,15 @@ PublicKey = <freertr-vm2-public-key>
 AllowedIPs = 192.168.1.0/24
 ```
 
+
+```zsh
+sudo wg set wg0 peer <r1-public-key>= allowed-ips 192.168.1.0/24
+```
+
+```zsh
+sudo wg set wg0 peer <r2-public-key>= allowed-ips 192.168.1.0/27
+```
+
 ## Router configuration (freeRtr)
 
 ### R1 HW and SW configs (VM1)
