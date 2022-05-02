@@ -57,9 +57,19 @@ end
 ```
 
 ### VM2 Vagrant config
-Similar to VM1 configuration. Just changing `vb.name="debian-bullseye64-vm2"`.
+Similar to VM1 configuration. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
 
 ### VM3 Vagrant config
+Similar to VM1 configuration. Just changing guest provisioning only.
+
+```zsh
+...
+config.vm.provision "shell", inline: <<-SHELL
+     apt-get update
+     apt-get upgrade -y        
+     apt-get install -y wireguard
+SHELL
+```
 
 ### R1 HW and SW configs (VM1)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
