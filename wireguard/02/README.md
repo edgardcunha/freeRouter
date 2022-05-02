@@ -1,4 +1,4 @@
-# Wireguard tunnel between R1 (VM1), WG-Server (VM2) and R2 (VM3)
+# Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
 
 ## Topology
 VM1 (10.250.250.242/16), VM2 (10.250.250.243/16) and VM2 (10.250.250.244/16)
