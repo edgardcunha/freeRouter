@@ -101,14 +101,14 @@ sudo wg set wg0 peer <r1-public-key>= allowed-ips 192.168.1.0/24
 sudo wg set wg0 peer <r2-public-key>= allowed-ips 192.168.1.0/27
 ```
 
-## Router configuration (freeRtr)
+## Routers configuration (freeRtr)
 
 ### R1 HW and SW configs (VM1)
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
-int eth1 eth 0000.1111.0001 127.0.0.1 20001 127.0.0.1 65535
-tcp2vrf 2323 v1 23
-proc eth0 sudo /rtr/pcapInt.bin eth0 65535 127.0.0.1 20001 127.0.0.1
+int eth1 eth 0000.1111.0001 127.0.0.1 10001 127.0.0.1 65535
+tcp2vrf 1123 v1 23
+proc eth0 sudo /rtr/pcapInt.bin eth0 65535 127.0.0.1 10001 127.0.0.1
 ```
 Software configuration file `sudo nano /rtr/rtr-sw.txt`:
 ```zsh
@@ -167,6 +167,72 @@ server telnet tel
 !
 client udp-checksum transmit
 ipv4 route v1 10.250.250.244 /32 10.0.2.16
+end
+```
+
+### R2 HW and SW configs (VM3)
+Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
+```zsh
+int eth1 eth 0000.2222.0001 127.0.0.1 20001 127.0.0.1 65535
+tcp2vrf 2223 v1 23
+proc eth0 sudo /rtr/pcapInt.bin eth0 65535 127.0.0.1 20001 127.0.0.1
+```
+Software configuration file `sudo nano /rtr/rtr-sw.txt`:
+```zsh
+hostname r2
+!
+crypto ipsec ips1
+ description <r1-private-key><wireguard-server-public-key>
+ key GExWuXQ9RV4E+xeK/sXjk+DvBPJEAVbS5Z0KaWh2fV0=8i7QSghwslgQ3LCHg5pnEtkVgyd1KooDJK5F3xKYJTc=
+ exit
+!
+prefix-list all4
+ sequence 10 permit 0.0.0.0/0 ge 0 le 0
+ exit
+!
+prefix-list all6
+ sequence 10 permit ::/0 ge 0 le 0
+ exit
+!
+vrf def v1
+ exit
+!
+int eth1
+ no desc
+ vrf for v1
+ ipv4 address dynamic dynamic
+ ipv4 gateway-prefix all4
+ ipv4 dhcp-client enable
+ ipv4 dhcp-client early
+ no shutdown
+ no log-link-change
+ exit
+!
+interface tunnel1
+ description r2@eth1 -> wireguard-server[192.168.25.30]@51820
+ tunnel key 51820
+ tunnel vrf v1
+ tunnel protection ips1
+ tunnel source eth1
+ tunnel destination 192.168.25.30
+ tunnel mode wireguard
+ vrf forwarding v1
+ ipv4 address 192.168.1.3 /24
+ no shutdown
+ no log-link-change
+ exit
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec logging
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+!client udp-checksum transmit
 end
 ```
 
