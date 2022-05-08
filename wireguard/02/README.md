@@ -1,5 +1,8 @@
 # Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
 
+## Requirement
+
+
 ## Topology
 VM1 (NAT), VM2 (NAT/Bridge) and VM3 (NAT)
 ```mermaid
@@ -245,3 +248,9 @@ Make it executable:
 ```zsh
 sudo chmod +x start.sh
 ```
+
+## References
+[Vagrant Documentation](https://www.vagrantup.com/docs)
+[Wireguard Documentation](https://www.wireguard.com/)
+[RARE/freeRtr Documentation](http://docs.freertr.org/)
+[Wireguard and RARE/freeRtr integration example](https://wiki.geant.org/pages/viewpage.action?pageId=270630994)
