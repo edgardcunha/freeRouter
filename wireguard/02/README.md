@@ -250,7 +250,7 @@ sudo chmod +x start.sh
 ```
 
 ## References
-[Vagrant Documentation](https://www.vagrantup.com/docs)
-[Wireguard Documentation](https://www.wireguard.com/)
-[RARE/freeRtr Documentation](http://docs.freertr.org/)
-[Wireguard and RARE/freeRtr integration example](https://wiki.geant.org/pages/viewpage.action?pageId=270630994)
+- [Vagrant Documentation](https://www.vagrantup.com/docs)
+- [Wireguard Documentation](https://www.wireguard.com/)
+- [RARE/freeRtr Documentation](http://docs.freertr.org/)
+- [Wireguard and RARE/freeRtr integration example](https://wiki.geant.org/pages/viewpage.action?pageId=270630994)
