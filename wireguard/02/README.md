@@ -1,6 +1,12 @@
 # Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
 
-## Requirement
+## Requirements
+- Virtualbox
+- Vagrant
+- Wireguard
+- RARE/freeRtr
+
+## Overview
 
 
 ## Topology
@@ -20,7 +26,7 @@ flowchart LR
     B <==>| Tunnel | C
 ```
 
-## VM configuration (Vagrant)
+## Vagrant Configuration
 
 ### VM1 Vagrant config
 Simplified version of VM1 Vagrantfile configuration.
