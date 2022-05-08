@@ -1,7 +1,7 @@
 # Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
 
 ## Topology
-VM1 (10.250.250.242/16), VM2 (10.250.250.243/16) and VM2 (10.250.250.244/16)
+VM1 (NAT), VM2 (NAT/Bridge) and VM3 (NAT)
 ```mermaid
 flowchart LR
     subgraph VM1 ["VM1"]
