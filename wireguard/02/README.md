@@ -7,7 +7,7 @@
 - RARE/freeRtr
 
 ## Overview
-
+In this tutorial we will demonstrate the necessary configurations to establish a tunnel between routers R1 (VM1) and R2 (VM3) passing through the Wireguard Server (VM2).
 
 ## Topology
 VM1 (NAT), VM2 (NAT/Bridge) and VM3 (NAT)
