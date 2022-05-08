@@ -1,10 +1,10 @@
 # Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
 
 ## Requirements
-- Virtualbox
-- Vagrant
-- Wireguard
-- RARE/freeRtr
+- [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+- [Vagrant](https://www.vagrantup.com/downloads)
+- [Wireguard](https://www.wireguard.com/install/)
+- [RARE/freeRtr](http://www.freertr.org/)
 
 ## Overview
 In this tutorial we will demonstrate the necessary configurations to establish a tunnel between routers R1 (VM1) and R2 (VM3) passing through the Wireguard Server (VM2).
