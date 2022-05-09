@@ -31,7 +31,7 @@ flowchart LR
 ## Vagrant Configuration
 This tutorial has been tested and run on [Ubuntu 22.04](http://www.releases.ubuntu.com/22.04/). All commands outside the context of VMs use this OS.\
 Choose a directory to place the `Vagrantfille` files, such as `/home/$USER/experiment`, or any other location you want.\
-Create directories for vms with command:
+Create the necessary directories for the experiment with the command:
 ```zsh
 mkdir /home/$USER/experiment/{r1,r2,wgs}
 ```
@@ -90,7 +90,7 @@ SHELL
 Similar to VM1 configuration. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
 
 ## Wireguard Server Config (VM2)
-Generate the public and private keys for `WG-Server`, `R1` and `R2`.
+Generate the public and private keys for `wgs`, `r1` and `r2`.
 ```zsh
 umask 077 && wg genkey > wgs-private-key && wg pubkey < wgs-private-key > wgs-public-key
 umask 077 && wg genkey > r1-private-key && wg pubkey < r1-private-key > r1-public-key
@@ -192,7 +192,7 @@ Software configuration file `sudo nano /rtr/rtr-sw.txt`:
 hostname r2
 !
 crypto ipsec ips1
- description <r1-private-key><wireguard-server-public-key>
+ description <r1-private-key><wgs-public-key>
  key GExWuXQ9RV4E+xeK/sXjk+DvBPJEAVbS5Z0KaWh2fV0=8i7QSghwslgQ3LCHg5pnEtkVgyd1KooDJK5F3xKYJTc=
  exit
 !
@@ -219,15 +219,15 @@ int eth1
  exit
 !
 interface tunnel1
- description r2@eth1 -> wireguard-server[192.168.25.30]@51820
+ description r2@eth1 -> wgs-ip-eth1@51820
  tunnel key 51820
  tunnel vrf v1
  tunnel protection ips1
  tunnel source eth1
- tunnel destination 192.168.25.30
+ tunnel destination <wgs-ip-eth1>
  tunnel mode wireguard
  vrf forwarding v1
- ipv4 address 192.168.1.3 /24
+ ipv4 address 10.10.10.2 /24
  no shutdown
  no log-link-change
  exit
