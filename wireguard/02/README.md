@@ -1,5 +1,5 @@
 # Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
-[Wireguard](https://www.wireguard.com/) gained a lot of popularity and attention when [it was incorporated into the Linux Kernel in March 2020](https://en.wikipedia.org/wiki/WireGuard). And pure coincidence or not, 1 month later, Wireguard made its way through ubuntu 20.04 LTS.
+[Wireguard](https://www.wireguard.com/) gained a lot of popularity and attention when [it was incorporated into the Linux Kernel in March 2020](https://en.wikipedia.org/wiki/WireGuard). In this tutorial, we demonstrate the connection between two isolated VMs through the Wireguard tunnel. 
 
 ## Requirements
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
@@ -8,8 +8,8 @@
 - [RARE/freeRtr](http://www.freertr.org/)
 
 ## Overview
-In this tutorial we will demonstrate the necessary configurations to establish a tunnel between routers R1 (VM1) and R2 (VM3) passing through the Wireguard Server (VM2).
-An important point that we must observe is the isolation between VM1 and VM3, which allows demonstrating the effectiveness of the tunnel.
+In this tutorial, we demonstrate the necessary configurations to establish a tunnel between routers R1 (VM1) and R2 (VM3) passing through the Wireguard Server (VM2).\
+An important point that we must observe is the isolation between the virtual machines VM1 and VM3, which allows demonstrating the effectiveness of the tunnel.
 
 ## Topology
 VM1 (NAT), VM2 (NAT/Bridge) and VM3 (NAT)
