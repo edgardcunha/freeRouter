@@ -92,6 +92,15 @@ SHELL
 ### VM3 Vagrant config
 Similar to VM1 config `nano /home/$USER/experiment/r2/Vagrantfile`. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
 
+### Create/Start the VMs
+Use the vagrant up command on directories:
+
+- `cd /home/$USER/experiment/r1`
+- `cd /home/$USER/experiment/wgs`
+- `cd /home/$USER/experiment/r2`
+
+This command will create the virtual machines VM1, VM2 and VM3 and install the dependencies needed for the experiment, such as RARE/freeRtr and Wireguard.
+
 ## Wireguard Server Config (VM2)
 Generate the public and private keys for `wgs`, `r1` and `r2`.
 ```zsh
