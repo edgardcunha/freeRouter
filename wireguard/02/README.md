@@ -19,13 +19,15 @@ flowchart LR
         A((r1))
     end
     subgraph VM2 ["VM2"]
-        B[WGS]
+        B[wgs]
     end
     subgraph VM3 ["VM3"]
         C((r2))
     end
-    A <==>| Tunnel | B
-    B <==>| Tunnel | C
+    VM1 ==>| NAT | VM2
+    VM3 ==>| NAT | VM2
+    A <==>| Wireguard Tunnel | B
+    B <==>| Wireguard Tunnel | C
 ```
 
 ## Vagrant Configuration
