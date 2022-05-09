@@ -299,11 +299,11 @@ Make it executable:
 sudo chmod +x start.sh
 ```
 
-# Verification
+## Verification
 On r1...\
 On r2...\
 
-# Conclusion
+## Conclusion
 In this tutorial we learned how to configure a Wireguard tunnel between routers r1 and r2, isolated in different VM contexts, through the Wireguard server.
 
 ## References
