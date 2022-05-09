@@ -94,7 +94,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "wgs"
   
   # Create a public network, which generally matched to bridged network.
-  config.vm.network "public_network", use_dhcp_assigned_default_route: true
+  config.vm.network "public_network", bridge: "enp3s0", use_dhcp_assigned_default_route: true
   
   # sharing files between host and guest
   config.vm.synced_folder ".", "/home/vagrant/data"
@@ -299,10 +299,12 @@ Make it executable:
 sudo chmod +x start.sh
 ```
 
-# Troubleshoting
-
+# Verification
+On r1...\
+On r2...\
 
 # Conclusion
+In this tutorial we learned how to configure a Wireguard tunnel between routers r1 and r2, isolated in different VM contexts, through the Wireguard server.
 
 ## References
 - [Vagrant Documentation](https://www.vagrantup.com/docs)
