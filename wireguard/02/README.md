@@ -302,8 +302,20 @@ sudo chmod +x start.sh
 ```
 
 ## Verification
-On r1...\
+
+### Enable the tunnel
+In `wgs`, run `sudo wg-quick up wg0` command to enable the tunnel.\
+
+### Testing connectivity
+In r1...\
+
 On r2...\
+
+
+### Forward Traffic
+```
+sudo sysctl -w net.ipv4.ip_forward=1
+```
 
 ## Conclusion
 In this tutorial we learned how to configure a Wireguard tunnel between routers r1 and r2, isolated in different VM contexts, through the Wireguard server.
