@@ -1,4 +1,5 @@
 # Wireguard tunnel between R1 (VM1), WGS (VM2) and R2 (VM3)
+[Wireguard](https://www.wireguard.com/) gained a lot of popularity and attention when [it was incorporated into the Linux Kernel in March 2020](https://en.wikipedia.org/wiki/WireGuard). And pure coincidence or not, 1 month later, Wireguard made its way through ubuntu 20.04 LTS.
 
 ## Requirements
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
