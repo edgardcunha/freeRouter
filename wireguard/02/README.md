@@ -39,7 +39,7 @@ mkdir /home/$USER/experiment/{r1,r2,wgs}
 ```
 
 ### VM1 Vagrant config
-Simplified version of VM1 Vagrantfile configuration.
+Simplified version of VM1 Vagrantfile config `nano /home/$USER/experiment/r1`.
 ```zsh
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -77,7 +77,7 @@ end
 ```
 
 ### VM2 Vagrant config
-Similar to VM1 configuration. Just changing guest provisioning only.
+Similar to VM1 config `nano /home/$USER/experiment/wgs`, just changing guest provisioning only.
 
 ```zsh
 ...
@@ -86,10 +86,11 @@ config.vm.provision "shell", inline: <<-SHELL
      apt-get upgrade -y        
      apt-get install -y wireguard
 SHELL
+...
 ```
 
 ### VM3 Vagrant config
-Similar to VM1 configuration. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
+Similar to VM1 config `nano /home/$USER/experiment/r2`. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
 
 ## Wireguard Server Config (VM2)
 Generate the public and private keys for `wgs`, `r1` and `r2`.
