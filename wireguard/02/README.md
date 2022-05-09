@@ -147,15 +147,15 @@ int eth1
  exit
 !
 interface tunnel1
- description r2@eth1 -> wireguard-server[200.137.68.76]@51820
+ description r2@eth1 -> wgs-ip-eth1@51820
  tunnel key 51820
  tunnel vrf v1
  tunnel protection ips1
- tunnel source eth1
- tunnel destination 200.137.68.76
+ tunnel source eth0
+ tunnel destination <wgs-ip-eth1>
  tunnel mode wireguard
  vrf forwarding v1
- ipv4 address 10.250.250.244 /32
+ ipv4 address 10.10.10.1 /24
  no shutdown
  no log-link-change
  exit
@@ -170,8 +170,6 @@ server telnet tel
  vrf v1
  exit
 !
-client udp-checksum transmit
-ipv4 route v1 10.250.250.244 /32 10.0.2.16
 end
 ```
 
@@ -237,14 +235,15 @@ server telnet tel
  vrf v1
  exit
 !
-!client udp-checksum transmit
 end
 ```
 
-### Launch freeRouter
-Edit `start.sh` file with the command:
+### Start RARE/freeRtr
+Edit `start.sh` file with the command `sudo nano /home/vagrant/start.sh`:
 ```zsh
-echo "java -jar /rtr/rtr.jar routersc /rtr/rtr-hw.txt /rtr/rtr-sw.txt" > start.sh
+#!/bin/sh
+# This script start the RARE/freeRtr router
+java -jar /rtr/rtr.jar routersc /rtr/rtr-hw.txt /rtr/rtr-sw.txt
 ```
 Make it executable:
 ```zsh
