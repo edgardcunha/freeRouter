@@ -170,8 +170,8 @@ Software configuration file `sudo nano /rtr/rtr-sw.txt`:
 hostname r1
 !
 crypto ipsec ips1
- description <r1-private-key><wireguard-server-public-key>
- key GExWuXQ9RV4E+xeK/sXjk+DvBPJEAVbS5Z0KaWh2fV0=8i7QSghwslgQ3LCHg5pnEtkVgyd1KooDJK5F3xKYJTc=
+ description Router r1's private key and Wireguard Server's public key.
+ key <r1-private-key><wgs-public-key>
  exit
 !
 prefix-list all4
@@ -236,8 +236,8 @@ Software configuration file `sudo nano /rtr/rtr-sw.txt`:
 hostname r2
 !
 crypto ipsec ips1
- description <r1-private-key><wgs-public-key>
- key GExWuXQ9RV4E+xeK/sXjk+DvBPJEAVbS5Z0KaWh2fV0=8i7QSghwslgQ3LCHg5pnEtkVgyd1KooDJK5F3xKYJTc=
+ description Router r2's private key and Wireguard Server's public key.
+ key <r1-private-key><wgs-public-key>
  exit
 !
 prefix-list all4
