@@ -144,14 +144,14 @@ Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
 [Interface]
 Address = 10.10.10.10/24
 ListenPort = 51820
-PrivateKey = <debian-vm1-private-key>
+PrivateKey = <wgs-private-key>
 
 [Peer]
-PublicKey = <freertr-vm1-public-key>
+PublicKey = <r1-public-key>
 AllowedIPs = 10.10.10.1/32
 
 [Peer]
-PublicKey = <freertr-vm2-public-key>
+PublicKey = <r2-public-key>
 AllowedIPs = 10.10.10.2/32
 ```
 
