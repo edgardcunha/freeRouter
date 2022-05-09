@@ -29,6 +29,12 @@ flowchart LR
 ```
 
 ## Vagrant Configuration
+This tutorial has been tested and run on [Ubuntu 22.04](http://www.releases.ubuntu.com/22.04/). All commands outside the context of VMs use this OS.\
+Choose a directory to place the `Vagrantfille` files, such as `/home/$USER/experiment`, or any other location you want.\
+Create directories for vms with command:
+```zsh
+mkdir /home/$USER/experiment/{r1,r2,wgs}
+```
 
 ### VM1 Vagrant config
 Simplified version of VM1 Vagrantfile configuration.
