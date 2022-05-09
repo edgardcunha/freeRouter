@@ -132,7 +132,7 @@ Use the vagrant up command on directories:
 This command will create and start the virtual machines `VM1`, `VM2` and `VM3`, additionally it will also install the necessary dependencies for the experiment such as RARE/freeRtr and Wireguard.
 
 ## Wireguard Server Config (VM2)
-Generate the public and private keys for `wgs`, `r1` and `r2`.
+Login to VM2 with the `vagrant ssh` command. Generate the public and private keys for `wgs`, `r1` and `r2`.
 ```zsh
 umask 077 && wg genkey > wgs-private-key && wg pubkey < wgs-private-key > wgs-public-key
 umask 077 && wg genkey > r1-private-key && wg pubkey < r1-private-key > r1-public-key
@@ -158,6 +158,7 @@ AllowedIPs = 10.10.10.2/32
 ## Routers configuration (freeRtr)
 
 ### R1 HW and SW configs (VM1)
+Login to VM1 with the `vagrant ssh` command.
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
 int eth1 eth 0000.1111.0001 127.0.0.1 10001 127.0.0.1 65535
@@ -223,6 +224,7 @@ end
 ```
 
 ### R2 HW and SW configs (VM3)
+Login to VM3 with the `vagrant ssh` command.
 Hardware configuration file `sudo nano /rtr/rtr-hw.txt`:
 ```zsh
 int eth1 eth 0000.2222.0001 127.0.0.1 20001 127.0.0.1 65535
