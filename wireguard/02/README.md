@@ -47,6 +47,9 @@ Simplified version of `VM1` Vagrantfile config `nano /home/$USER/experiment/r1/V
 Vagrant.configure("2") do |config|
   # vagrant box
   config.vm.box = "debian/bullseye64"
+  
+  # changing the hostname
+  config.vm.hostname = "r1"
 
   # sharing files between host and guest
   config.vm.synced_folder ".", "/home/vagrant/data"
@@ -62,7 +65,7 @@ Vagrant.configure("2") do |config|
  	vb.name = "debian-bullseye64-vm1"
   end
 
- # Provisioning guest
+  # Provisioning guest
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
     apt-get upgrade -y
@@ -80,17 +83,44 @@ end
 Similar to `VM1` config `nano /home/$USER/experiment/wgs/Vagrantfile`, just changing guest provisioning only.
 
 ```zsh
-...
-config.vm.provision "shell", inline: <<-SHELL
-     apt-get update
-     apt-get upgrade -y        
-     apt-get install -y wireguard
-SHELL
-...
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # vagrant box
+  config.vm.box = "debian/bullseye64"
+  
+  # changing the hostname
+  config.vm.hostname = "wgs"
+  
+  # Create a public network, which generally matched to bridged network.
+  config.vm.network "public_network", use_dhcp_assigned_default_route: true
+  
+  # sharing files between host and guest
+  config.vm.synced_folder ".", "/home/vagrant/data"
+
+  # https://www.vagrantup.com/docs/networking/forwarded_ports
+  config.vm.usable_port_range = 8000..8999
+
+  # Provider-specific configuration. These expose provider-specific options.
+  config.vm.provider "virtualbox" do |vb|
+ 	# Customize the amount of memory on the VM:
+ 	vb.memory = "1024"
+ 	vb.cpus = 1
+ 	vb.name = "debian-bullseye64-wgs"
+  end
+
+  # Provisioning guest
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get upgrade -y
+    apt-get install -y wireguard
+  SHELL
+end
 ```
 
 ### VM3 Vagrant config
-Similar to `VM1` config `nano /home/$USER/experiment/r2/Vagrantfile`. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
+Similar to `VM1` config `nano /home/$USER/experiment/r2/Vagrantfile`, just changing `config.vm.hostname` to `"r2"` and `vb.name` to `"debian-bullseye64-vm2"`.
 
 ### Create/Start the VMs
 Use the vagrant up command on directories:
@@ -268,6 +298,11 @@ Make it executable:
 ```zsh
 sudo chmod +x start.sh
 ```
+
+# Troubleshoting
+
+
+# Conclusion
 
 ## References
 - [Vagrant Documentation](https://www.vagrantup.com/docs)
