@@ -93,22 +93,17 @@ umask 077 && wg genkey > r2-private-key && wg pubkey < r2-private-key > r2-publi
 Edit the `wg0.conf` file with the command `sudo nano /etc/wireguard/wg0.conf`:
 ```zsh
 [Interface]
-Address = 192.168.1.1/24
+Address = 10.10.10.10/24
 ListenPort = 51820
 PrivateKey = <debian-vm1-private-key>
 
 [Peer]
+PublicKey = <freertr-vm1-public-key>
+AllowedIPs = 10.10.10.1/32
+
+[Peer]
 PublicKey = <freertr-vm2-public-key>
-AllowedIPs = 192.168.1.0/24
-```
-
-
-```zsh
-sudo wg set wg0 peer <r1-public-key>= allowed-ips 192.168.1.0/24
-```
-
-```zsh
-sudo wg set wg0 peer <r2-public-key>= allowed-ips 192.168.1.0/27
+AllowedIPs = 10.10.10.2/32
 ```
 
 ## Routers configuration (freeRtr)
