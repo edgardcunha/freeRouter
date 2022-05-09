@@ -237,7 +237,7 @@ hostname r2
 !
 crypto ipsec ips1
  description Router r2's private key and Wireguard Server's public key.
- key <r1-private-key><wgs-public-key>
+ key <r2-private-key><wgs-public-key>
  exit
 !
 prefix-list all4
