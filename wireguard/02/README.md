@@ -8,7 +8,7 @@
 - [RARE/freeRtr](http://www.freertr.org/)
 
 ## Overview
-In this tutorial, we demonstrate the necessary configurations to establish a tunnel between routers R1 (VM1) and R2 (VM3) passing through the Wireguard Server (VM2).\
+In this tutorial, we demonstrate the necessary configurations to establish a tunnel between routers `R1` (`VM1`) and `R2` (`VM3`) passing through the `WGS` (`VM2`).\
 An important point that we must observe is the isolation between the virtual machines VM1 and VM3, which allows demonstrating the effectiveness of the tunnel.
 
 ## Topology
@@ -39,7 +39,7 @@ mkdir /home/$USER/experiment/{r1,r2,wgs}
 ```
 
 ### VM1 Vagrant config
-Simplified version of VM1 Vagrantfile config `nano /home/$USER/experiment/r1/Vagrantfile`.
+Simplified version of `VM1` Vagrantfile config `nano /home/$USER/experiment/r1/Vagrantfile`.
 ```zsh
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -77,7 +77,7 @@ end
 ```
 
 ### VM2 Vagrant config
-Similar to VM1 config `nano /home/$USER/experiment/wgs/Vagrantfile`, just changing guest provisioning only.
+Similar to `VM1` config `nano /home/$USER/experiment/wgs/Vagrantfile`, just changing guest provisioning only.
 
 ```zsh
 ...
@@ -90,7 +90,7 @@ SHELL
 ```
 
 ### VM3 Vagrant config
-Similar to VM1 config `nano /home/$USER/experiment/r2/Vagrantfile`. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
+Similar to `VM1` config `nano /home/$USER/experiment/r2/Vagrantfile`. Just changing `vb.name` to `"debian-bullseye64-vm2"`.
 
 ### Create/Start the VMs
 Use the vagrant up command on directories:
@@ -99,7 +99,7 @@ Use the vagrant up command on directories:
 - `cd /home/$USER/experiment/wgs`
 - `cd /home/$USER/experiment/r2`
 
-This command will create the virtual machines VM1, VM2 and VM3 and install the dependencies needed for the experiment, such as RARE/freeRtr and Wireguard.
+This command will create and start the virtual machines `VM1`, `VM2` and `VM3` and install the dependencies needed for the experiment, such as RARE/freeRtr and Wireguard.
 
 ## Wireguard Server Config (VM2)
 Generate the public and private keys for `wgs`, `r1` and `r2`.
