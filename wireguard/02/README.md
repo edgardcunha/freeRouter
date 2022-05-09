@@ -201,7 +201,7 @@ interface tunnel1
  tunnel key 51820
  tunnel vrf v1
  tunnel protection ips1
- tunnel source eth0
+ tunnel source eth1
  tunnel destination <wgs-ip-eth1>
  tunnel mode wireguard
  vrf forwarding v1
