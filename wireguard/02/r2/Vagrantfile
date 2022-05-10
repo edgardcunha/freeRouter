@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # vagrant box.
+  config.vm.box = "debian/bullseye64"
+  
+  # changing the hostname.
+  config.vm.hostname = "wgs"
+  
+  # create a public network matched to bridged network.
+  config.vm.network "public_network", bridge: "enp3s0", use_dhcp_assigned_default_route: true
+  
+  # sharing files between host and guest
+  config.vm.synced_folder ".", "/home/vagrant/data"
+
+  # enable a range for automatic port forwarding.
+  config.vm.usable_port_range = 8000..8999
+
+  # provider-specific configuration.
+  config.vm.provider "virtualbox" do |vb|
+ 	  # customize the amount of memory
+ 	  vb.memory = "1024"
+    # customize the number of cpus
+ 	  vb.cpus = 1
+    # customize the name displayed on VirtualBox
+ 	  vb.name = "debian-bullseye64-wgs"
+  end
+
+  # provisioning guest.
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get upgrade -y
+    apt-get install -y wireguard
+  SHELL
+end
