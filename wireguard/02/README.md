@@ -307,14 +307,50 @@ sudo chmod +x start.sh
 In `wgs`, run `sudo wg-quick up wg0` command to enable the tunnel.\
 
 ### Testing connectivity
-In r1...\
-
-On r2...\
-
-
-### Forward Traffic
+In `r1`, ping `wgs`tunnel endpoint with `ping 10.10.10.10 vrf v1`.
+```zsh
+pinging 10.10.10.10, src=null, vrf=v1, cnt=5, len=64, tim=1000, gap=0, ttl=255, tos=0, sgt=0, flow=0, fill=0, sweep=false, multi=false
+!!!!!
+result=100%, recv/sent/lost/err=5/5/0/0, rtt min/avg/max/sum=2/3/7/33, ttl min/avg/max=64/64/64, tos min/avg/max=0/0/0
 ```
+
+In `r2`, ping `wgs`tunnel endpoint with `ping 10.10.10.10 vrf v1`.
+```zsh
+pinging 10.10.10.10, src=null, vrf=v1, cnt=5, len=64, tim=1000, gap=0, ttl=255, tos=0, sgt=0, flow=0, fill=0, sweep=false, multi=false
+!!!!!
+result=100%, recv/sent/lost/err=5/5/0/0, rtt min/avg/max/sum=3/6/11/34, ttl min/avg/max=64/64/64, tos min/avg/max=0/0/0
+```
+
+In `wgs`, ping `r1` and `r2` tunnel endpoint with `ping 10.10.10.1 -c 4` and `ping 10.10.10.2 -c 4`.
+```zsh
+PING 10.10.10.1 (10.10.10.1) 56(84) bytes of data.
+64 bytes from 10.10.10.1: icmp_seq=1 ttl=255 time=1.71 ms
+64 bytes from 10.10.10.1: icmp_seq=2 ttl=255 time=2.56 ms
+64 bytes from 10.10.10.1: icmp_seq=3 ttl=255 time=2.42 ms
+64 bytes from 10.10.10.1: icmp_seq=4 ttl=255 time=3.22 ms
+
+--- 10.10.10.1 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3007ms
+rtt min/avg/max/mdev = 1.705/2.477/3.224/0.539 ms
+```
+
+```zsh
+PING 10.10.10.2 (10.10.10.2) 56(84) bytes of data.
+64 bytes from 10.10.10.2: icmp_seq=1 ttl=255 time=2.37 ms
+64 bytes from 10.10.10.2: icmp_seq=2 ttl=255 time=3.45 ms
+64 bytes from 10.10.10.2: icmp_seq=3 ttl=255 time=2.51 ms
+64 bytes from 10.10.10.2: icmp_seq=4 ttl=255 time=5.14 ms
+
+--- 10.10.10.2 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3006ms
+rtt min/avg/max/mdev = 2.373/3.369/5.141/1.103 ms
+```
+
+### Forwarding Traffic
+
+```zsh
 sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ipv6.conf.all.forwarding=1
 ```
 
 ## Conclusion
