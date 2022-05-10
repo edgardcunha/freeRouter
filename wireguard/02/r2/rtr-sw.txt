@@ -1,0 +1,51 @@
+hostname r2
+!
+crypto ipsec ips1
+ description Router r2's private key and Wireguard Server's public key.
+ key <r2-private-key><wgs-public-key>
+ exit
+!
+prefix-list all4
+ sequence 10 permit 0.0.0.0/0 ge 0 le 0
+ exit
+!
+vrf def v1
+ exit
+!
+int eth1
+ no desc
+ vrf for v1
+ ipv4 address dynamic dynamic
+ ipv4 gateway-prefix all4
+ ipv4 dhcp-client enable
+ ipv4 dhcp-client early
+ no shutdown
+ no log-link-change
+ exit
+!
+interface tunnel1
+ description r2@eth1 -> wgs-ip-eth1@51820
+ tunnel key 51820
+ tunnel vrf v1
+ tunnel protection ips1
+ tunnel source eth1
+ tunnel destination <wgs-ip-eth1>
+ tunnel mode wireguard
+ vrf forwarding v1
+ ipv4 address 10.10.10.2 /24
+ ipv6 address 1010::2 /64
+ no shutdown
+ no log-link-change
+ exit
+!
+server telnet tel
+ security protocol telnet
+ exec timeout 10000000
+ exec logging
+ no exec authorization
+ no login authentication
+ login logging
+ vrf v1
+ exit
+!
+end
