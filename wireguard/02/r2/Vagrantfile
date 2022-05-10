@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # vagrant box.
+  config.vm.box = "debian/bullseye64"
+  
+  # changing the hostname.
+  config.vm.hostname = "r2"
+
+  # sharing files between host and guest.
+  config.vm.synced_folder ".", "/home/vagrant/data"
+
+  # https://www.vagrantup.com/docs/networking/forwarded_ports
+  config.vm.usable_port_range = 8000..8999
+
+  # provider-specific configuration.
+  config.vm.provider "virtualbox" do |vb|
+ 	# Customize the amount of memory.
+ 	vb.memory = "1024"
+ 	vb.cpus = 1
+ 	vb.name = "debian-bullseye64-r2"
+  end
+
+  # Provisioning guest.
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get update
+    apt-get upgrade -y
+    apt-get install -y default-jre-headless --no-install-recommends
+    wget www.freertr.net/rtr.jar
+    wget www.freertr.net/rtr-`uname -m`.tar -O rtr.tar
+    mkdir /rtr
+    mv rtr.* /rtr
+    tar -xvf /rtr/rtr.tar -C /rtr
+  SHELL
+end
