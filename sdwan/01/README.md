@@ -8,8 +8,62 @@ A [software-defined wide area network](https://www.paloaltonetworks.com/cyberped
 ## Topology
 ![Experiment Topology](topology.svg "Experiment Topology")
 
+## VM Settings
+Debian 11.3 (SID), RAM 2 GB, CPU 2 vCPU, HD 20 GB, and "one line" RARE/freeRtr install.
+
+## SD-WAN Settings
+On SD-WAN server
+```bash
+...
+interface loopback0
+ vrf forwarding inet
+ ipv4 address 10.10.10.99 255.255.255.255
+ no shutdown
+ no log-link-change
+ exit
+!
+ipv4 pool p4 20.20.20.10 0.0.0.1 3
+server sdwan gcloud
+ security authentication users
+ security rsakey rsa
+ security dsakey dsa
+ security ecdsakey ecdsa
+ pool4 p4
+ vrf inet
+ exit
+!
+...
+```
+
+On clients.
+```bash
+...
+interface dialer1
+ encapsulation ppp
+ vrf forwarding inet
+ ipv4 address dynamic dynamic
+ no shutdown
+ no log-link-change
+ exit
+!
+proxy-profile p1
+ vrf inet
+ source ethernet1
+ exit
+!
+vpdn gcloud
+ interface dialer1
+ proxy p1
+ target 20.20.20.99
+ username users
+ password $v10$cA==
+ prefer ipv4
+ protocol sdwan
+ exit
+!
+...
+```
+
 ## References
-
 http://sdwan.freertr.org/
-
 https://www.paloaltonetworks.com/cyberpedia/what-is-a-sd-wan
