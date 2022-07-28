@@ -15,14 +15,22 @@ Debian 11.3 (SID), RAM 2 GB, CPU 2 vCPU, HD 20 GB, and "one line" RARE/freeRtr i
 On SD-WAN server
 ```bash
 ...
-interface loopback0
+interface ethernet1
+ description uplink
  vrf forwarding inet
- ipv4 address 10.10.10.99 255.255.255.255
+ ipv4 address dynamic dynamic
+ ipv4 gateway-prefix all4
+ ipv4 dhcp-client enable
+ ipv4 dhcp-client early
+ ipv6 address dynamic dynamic
+ ipv6 gateway-prefix all6
+ ipv6 slaac-client enable
+ ipv6 prefix-suppress
  no shutdown
  no log-link-change
  exit
 !
-ipv4 pool p4 20.20.20.10 0.0.0.1 3
+ipv4 pool p4 2.2.2.10 0.0.0.1 3
 server sdwan gcloud
  security authentication users
  security rsakey rsa
@@ -38,6 +46,21 @@ server sdwan gcloud
 On clients.
 ```bash
 ...
+interface ethernet1
+ description uplink
+ vrf forwarding inet
+ ipv4 address dynamic dynamic
+ ipv4 gateway-prefix all4
+ ipv4 dhcp-client enable
+ ipv4 dhcp-client early
+ ipv6 address dynamic dynamic
+ ipv6 gateway-prefix all6
+ ipv6 slaac-client enable
+ ipv6 prefix-suppress
+ no shutdown
+ no log-link-change
+ exit
+!
 interface dialer1
  encapsulation ppp
  vrf forwarding inet
@@ -54,7 +77,7 @@ proxy-profile p1
 vpdn gcloud
  interface dialer1
  proxy p1
- target 10.10.10.99
+ target [gcloud-public-ip]
  username users
  password $v10$cA==
  prefer ipv4
